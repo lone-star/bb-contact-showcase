@@ -1,4 +1,14 @@
-BB-contact-showcase
+# BB-contact-showcase
+
+## Install
+To install:
+- Have node installed
+- Do `npm install` on the dependancies defined in [/package.json](http://github.com/benjamin-michel/bb-contact-showcase/blob/master/package.json) (express, underscore)
+
+## Run
+To run, do `node app.js`
+
+## Description
 
 This showcase demonstrates a way of using client-side templating with a client which has minimal knowledge of the template's content, and the models themselves.
 This pattern is not breaking any MV*, it only moves the view part to the server, thus it should be studied more in dept.
