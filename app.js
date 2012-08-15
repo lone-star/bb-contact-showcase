@@ -4,21 +4,21 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+  , routes  = require('./routes')
+	,	fs      = require('fs');
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 // Configuration
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
 	app.set('view options', {layout: false});
-	app.register('.html', {
-		compile: function (str, option) {
-			return function (locals) {
-				return str;
-			};
-		}
+	app.engine('.html', function (path, options, fn) {
+		fs.readFile(path, 'utf8', function (err, str) {
+			if (err) return fn(err);
+			fn(null, str);
+		});
 	});
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -44,5 +44,5 @@ app.get('/contact', routes.contact);
 // Data Schema
 app.get('/contact-schema', routes.contactSchema);
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+var server = app.listen(3000);
+console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
