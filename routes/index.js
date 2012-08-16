@@ -21,6 +21,9 @@ exports.contact = function (req, res) {
 	});
 };
 
+
+//Function which will generate the template for create
+//It takes in a schema, and returns html
 var generateCreateTemplate = function (schema) {
   return '<form>'
 		+	_.reduce(schema, function (memo, item) {
@@ -59,9 +62,7 @@ var generateCreateTemplate = function (schema) {
 //This will return the schema of a contact.
 //In here, the contact only contains an HTML template
 exports.contactSchema = function (req, res) {
-
-	//in: json object
-	//out: html
+  //The schema given as input
 	var schema = {
 		create: [
 			{	name: 'full_name'
@@ -85,21 +86,6 @@ exports.contactSchema = function (req, res) {
 
 	//Generate the create template
 	var templateCreate = generateCreateTemplate(schema.create);
-
-	var htmlTemplate = '<p>My name is {{first_name}}.'
-									 + ' I am {{age}} years old, and'
-	 			 					 + ' I am a {{job}}!'
-									 + '{{twitter_link twitter}}';
-	/*
-	var templateCreate = '<form>'
-		+ '<label for="name">Give name</label>'
-		+ '<input id="name" name="username" type="text" value="def"/>'
-		+ '<select name="sex"><option value="m">Male</option>'
-			+ '<option value="f">Female</option>'
-		+ '<select>'
-		+	'<input id="submit-button" type="submit" value="ok"/>'
-		+ '</form>';
-	*/
 	res.json({
 		_id: '1'
 	,	template_create: templateCreate
