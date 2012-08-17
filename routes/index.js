@@ -69,6 +69,7 @@ exports.contactSchema = function (req, res) {
 			,	label: 'Full Name'
 			,	value: ''
 			,	type: 'text'
+			//Mandatory, read only
 			}
 		,	{	name: 'country'
 			,	label: 'Country'
